@@ -32,9 +32,9 @@ function App() {
         if (!response.ok) {
           setGeneralError("Upp kom villa. Vinsamlegast láttu vita af þér með öðrum hætti.")
           return;
-        } 
+        }
         setGeneralError("")
-        setSubmitCompleted(true)      
+        setSubmitCompleted(true)
       })
       .catch(error => alert(error))
       .finally(() => setIsSubmitEnabled(true));
@@ -47,40 +47,42 @@ function App() {
 
       <img src="./FGRlogo.png" alt="FGR logo" />
 
-      <p>Innskráning í mót</p>
-
-      {generalError && <p className="error">{generalError}</p>}
-
       {!submitCompleted && (
-        <form onSubmit={handleSubmit}>
-          <p>
-            <label>
-              Nafn: <input
-                className="input"
-                type="text"
-                name="name"
-                value={name}
-                onChange={event => setName(event.target.value)}
-              />
-            </label>
-            {nameError && <span className="error">{nameError}</span>}
-          </p>
-          <p>
-            <label>
-              Skilaboð (valfrjálst): <textarea
-                className="input"
-                name="message"
-                value={message}
-                onChange={event => setMessage(event.target.value)}
-              />
-            </label>
-          </p>
-          
+        <>
+          {generalError
+            ? <p className="error">{generalError}</p>
+            : <p>Innskráning í Sunnudagsdeild 25. okt</p>
+          }
+
+          <form onSubmit={handleSubmit}>
+            <p>
+              <label>
+                Nafn: <input
+                  className="input"
+                  type="text"
+                  name="name"
+                  value={name}
+                  onChange={event => setName(event.target.value)}
+                />
+              </label>
+              {nameError && <span className="error">{nameError}</span>}
+            </p>
+            <p>
+              <label>
+                Skilaboð (valfrjálst): <textarea
+                  className="input"
+                  name="message"
+                  value={message}
+                  onChange={event => setMessage(event.target.value)}
+                />
+              </label>
+            </p>
+
             <button
-              type="submit"              
+              type="submit"
               disabled={!isSubmitEnabled}>Innskrá</button>
-          
-        </form>
+          </form>
+        </>
       )}
 
       {submitCompleted && (
