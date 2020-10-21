@@ -3,7 +3,8 @@
 }
 
 .App-logo {
-  height: 40vmin;
+  display: block;
+  height: 60px;
   pointer-events: none;
 }
 
@@ -13,7 +14,7 @@
   }
 }
 
-.App-header {
+.main {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
@@ -35,4 +36,21 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.input {
+  display: block;
+  line-height: 29pt;
+  width: 100%;
+  font-size: calc(10px + 2vmin);
+}
+
+img {
+  width: 95%;
+  max-width: 720px;
+  height: auto;
+}
+
+.error {
+  color: red;
 }
