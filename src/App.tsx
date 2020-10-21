@@ -75,12 +75,11 @@ function App() {
               />
             </label>
           </p>
-          <p>
+          
             <button
-              type="submit"
-              className="input"
+              type="submit"              
               disabled={!isSubmitEnabled}>Innskrá</button>
-          </p>
+          
         </form>
       )}
 

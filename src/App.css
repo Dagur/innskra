@@ -43,12 +43,26 @@
   line-height: 29pt;
   width: 100%;
   font-size: calc(10px + 2vmin);
+  margin-bottom: 8px;
+  margin-top: 8px;
 }
 
 img {
   width: 95%;
   max-width: 720px;
   height: auto;
+}
+
+button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-top: 8px;
 }
 
 .error {
