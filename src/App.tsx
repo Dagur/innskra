@@ -1,24 +1,46 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { FormEvent } from 'react';
 import './App.css';
 
 function App() {
+  const [name, setName] = React.useState("");
+
+  const encode = (data: any) => {
+    return Object.keys(data)
+      .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+      .join("&");
+  }
+
+  const handleSubmit = (event: FormEvent) => {
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: encode({ "form-name": "innskra", name })
+    })
+      .then(() => alert("Takk fyrir og góða skemmtun"))
+      .catch(error => alert(error));
+
+    event.preventDefault();
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+
+      <form onSubmit={handleSubmit}>
         <p>
-          Edit <code>src/App.tsx</code> and save to reload.
+          <label>
+            Nafn: <input
+              type="text"
+              name="name"
+              value={name}
+              onChange={event => setName(event.target.value)}
+            />
+          </label>
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <p>
+          <button type="submit">Innskrá</button>
+        </p>
+      </form>
+
     </div>
   );
 }
