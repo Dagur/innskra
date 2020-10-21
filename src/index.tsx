@@ -6,7 +6,10 @@ import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <div className="App main">
+      <img src="./FGRlogo.png" alt="FGR logo" />
+      <App />
+    </div>
   </React.StrictMode>,
   document.getElementById('root')
 );

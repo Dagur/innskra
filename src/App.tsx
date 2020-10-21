@@ -1,5 +1,7 @@
 import React, { FormEvent } from 'react';
+import * as events from './events';
 import './App.css';
+import Thanks from './Thanks';
 
 const encode = (data: any) => {
   return Object.keys(data)
@@ -30,7 +32,7 @@ function App() {
     })
       .then(response => {
         if (!response.ok) {
-          setGeneralError("Upp kom villa. Vinsamlegast láttu vita af þér með öðrum hætti.")
+          setGeneralError("Villa :( Vinsamlegast hafðu samband með öðrum hætti")
           return;
         }
         setGeneralError("")
@@ -38,63 +40,66 @@ function App() {
       })
       .catch(error => alert(error))
       .finally(() => setIsSubmitEnabled(true));
-
-
   };
 
+  const [isActive, event] = events.getNext();
+
+  if (submitCompleted) {
+    return <Thanks onOk={() => { setSubmitCompleted(false) }} />;
+  }
+
+  if (!event) {
+    return <p>Engir viðburðir eru framundan</p>
+  }
+
+  if (!isActive) {
+
+    return (
+      <div>
+        <p>Næsti viðburður er {events.dateFormat(event.start)}</p>
+        <p>Innskráning hefst kl. {events.timeFormat(event.start)} </p>
+      </div>
+    )
+  }
+
   return (
-    <div className="App main">
+    <>
+      {generalError
+        ? <p className="error">{generalError}</p>
+        : <p>Innskráning í Sunnudagsdeild {events.dateFormat(event.start)}</p>
+      }
 
-      <img src="./FGRlogo.png" alt="FGR logo" />
+      <form onSubmit={handleSubmit}>
+        <p>
+          <label>
+            Nafn: <input
+              className="input"
+              type="text"
+              name="name"
+              value={name}
+              onChange={event => setName(event.target.value)}
+            />
+          </label>
+          {nameError && <span className="error">{nameError}</span>}
+        </p>
+        <p>
+          <label>
+            Skilaboð (valfrjálst): <textarea
+              className="input"
+              name="message"
+              value={message}
+              onChange={event => setMessage(event.target.value)}
+            />
+          </label>
+        </p>
 
-      {!submitCompleted && (
-        <>
-          {generalError
-            ? <p className="error">{generalError}</p>
-            : <p>Innskráning í Sunnudagsdeild 25. okt</p>
-          }
+        <button
+          type="submit"
+          disabled={!isSubmitEnabled}>Ég er mætt(ur)!</button>
+      </form>
+    </>
+  )
 
-          <form onSubmit={handleSubmit}>
-            <p>
-              <label>
-                Nafn: <input
-                  className="input"
-                  type="text"
-                  name="name"
-                  value={name}
-                  onChange={event => setName(event.target.value)}
-                />
-              </label>
-              {nameError && <span className="error">{nameError}</span>}
-            </p>
-            <p>
-              <label>
-                Skilaboð (valfrjálst): <textarea
-                  className="input"
-                  name="message"
-                  value={message}
-                  onChange={event => setMessage(event.target.value)}
-                />
-              </label>
-            </p>
-
-            <button
-              type="submit"
-              disabled={!isSubmitEnabled}>Innskrá</button>
-          </form>
-        </>
-      )}
-
-      {submitCompleted && (
-        <div>
-          <p>Takk fyrir. Góða skemmtun</p>
-          <button
-            className="input"
-            onClick={() => setSubmitCompleted(false)}>Skrá fleiri</button>
-        </div>
-      )}
-    </div>
-  );
 }
 
 export default App;
