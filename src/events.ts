@@ -12,12 +12,12 @@ const events: Array<Event> = [
     end: new Date('2020-10-25T11:30:01Z')
   },
   {
-    start: new Date('2020-11-01T10:30:00Z'),
-    end: new Date('2020-11-01T11:30:01Z')
-  },
-  {
     start: new Date('2020-11-08T10:30:00Z'),
     end: new Date('2020-11-08T11:30:01Z')
+  },
+  {
+    start: new Date('2020-11-15T10:30:00Z'),
+    end: new Date('2020-11-15T11:30:01Z')
   },
 ];
 
