@@ -8,16 +8,12 @@ type Event = {
 
 const events: Array<Event> = [
   {
-    start: new Date('2020-10-25T10:30:00Z'),
-    end: new Date('2020-10-25T11:30:01Z')
+    start: new Date('2020-12-06T10:30:00Z'),
+    end: new Date('2020-12-06T11:30:01Z')
   },
   {
-    start: new Date('2020-11-22T10:30:00Z'),
-    end: new Date('2020-11-22T11:30:01Z')
-  },
-  {
-    start: new Date('2020-11-29T10:30:00Z'),
-    end: new Date('2020-11-29T11:30:01Z')
+    start: new Date('2020-12-13T10:30:00Z'),
+    end: new Date('2020-12-13T11:30:01Z')
   },
 ];
 
